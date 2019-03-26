@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import {Header} from './shared/Header';
+import RentalList from './components/rental/booking-list/RentalList';
+import RoomDetail from './components/rental/booking-detail/RoomDetail';
+
+import { init } from './reducers';
+
 import './App.css';
+
+// call init from ./reducers to get data
+const store = init();
 
 class App extends Component {
   render() {
     return (
+      <Provider store={ store }>
+      <BrowserRouter>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Header />
+          <div className="container">
+            {/*default link by using Redirect ex: localhost:3030/roomlist */}
+            <Route exact path="/" render={() => <Redirect to='/roomlist' />}/>
+            <Route exact path="/roomlist" component={RentalList}/>
+            <Route exact path="/roomlist/:id" component={RoomDetail}/>
+          </div>
       </div>
+      </BrowserRouter>
+      </Provider>
     );
   }
 }
