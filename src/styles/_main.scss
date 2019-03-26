@@ -1,0 +1,10 @@
+//this place will combine all of css files
+@import 'variables.scss';
+@import 'header/header.scss';
+@import 'rental/rental-listing.scss';
+
+.page-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
